@@ -6,7 +6,6 @@ class TrainingList extends React.Component {
 
     shouldComponentUpdate() {
         console.log("TrainingList shouldComponentUpdate");
-        console.log(this.props.name);
         return true;
     }
 
@@ -15,7 +14,8 @@ class TrainingList extends React.Component {
             {id: 1, name : 'Reac.js'},
             {id: 2, name : 'React Native'},
             {id: 3, name : 'Angular'},
-            {id: 4, name : 'Typescript'}
+            {id: 4, name : 'Typescript'},
+            {id: 5}
         ];
 
         const listItems = trainings.map((training) => <TrainingItem key={training.id} name={training.name}/>);

@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class TrainingItem extends React.Component {
+    static defaultProps = {
+        name: 'unknown training'
+    };
+
     constructor(props) {
         super(props);
         this.openTraining = this.openTraining.bind(this);
@@ -32,5 +37,10 @@ class TrainingItem extends React.Component {
     }
 }
 
+// .isRequired permet de rendre obligatoire la props
+// Attention lorsqu'on met un defaultProps, le isRequired ne sera jamais faux
+TrainingItem.propTypes = {
+  name: PropTypes.string
+};
 
 export default TrainingItem;
