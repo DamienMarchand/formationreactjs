@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TrainingList from "./TrainingList";
 import LabelOnline from "./LabelOnline";
+import MyForm from "./MyForm";
 
 // class App extends Component {
 //   render() {
@@ -33,6 +34,7 @@ function App(props) {
 
             <LabelOnline />
             <TrainingList />
+            <MyForm/>
         </div>
     );
 }
