@@ -2,9 +2,6 @@ import React from 'react';
 import './TrainingTitle.css';
 
 class TrainingTitle extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     shouldComponentUpdate() {
         console.log("TrainingTitle shouldComponentUpdate");

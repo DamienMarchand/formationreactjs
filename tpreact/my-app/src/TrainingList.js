@@ -3,9 +3,6 @@ import TrainingItem from "./TrainingItem";
 import TrainingTitle from "./TrainingTitle";
 
 class TrainingList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     shouldComponentUpdate() {
         console.log("TrainingList shouldComponentUpdate");
@@ -14,13 +11,19 @@ class TrainingList extends React.Component {
     }
 
     render() {
+        const trainings = [
+            {id: 1, name : 'Reac.js'},
+            {id: 2, name : 'React Native'},
+            {id: 3, name : 'Angular'},
+            {id: 4, name : 'Typescript'}
+        ];
+
+        const listItems = trainings.map((training) => <TrainingItem key={training.id} name={training.name}/>);
+
         return (
             <div>
                 <TrainingTitle/>
-                <TrainingItem name="React.js"/>
-                <TrainingItem name="React Native"/>
-                <TrainingItem name="Angular"/>
-                <TrainingItem name="Typescript"/>
+                <ul>{listItems}</ul>
             </div>
         );
     }
