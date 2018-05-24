@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TrainingList from "./TrainingList";
+import LabelOnline from "./LabelOnline";
 
 // class App extends Component {
 //   render() {
@@ -30,6 +31,7 @@ function App(props) {
                 To get started, edit <code>src/App.js</code> and save to reload.
             </p>
 
+            <LabelOnline />
             <TrainingList />
         </div>
     );
