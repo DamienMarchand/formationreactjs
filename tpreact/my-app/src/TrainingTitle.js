@@ -4,7 +4,6 @@ import './TrainingTitle.css';
 class TrainingTitle extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isOnline: true};
     }
 
     shouldComponentUpdate() {
