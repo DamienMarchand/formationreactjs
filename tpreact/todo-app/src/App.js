@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import {todosReducer} from './store/todo.reducer';
+import {createLogger} from 'redux-logger';
 import logo from './logo.svg';
 import './App.css';
 
 import TodoContainer from "./TodoContainer";
+
+// Assemblage des différents reducers d'une application
+const reducers = combineReducers({
+    todos: todosReducer
+});
+
+const logger = createLogger({
+    level: 'log'
+});
+
+// Création du store
+const store = createStore(reducers, applyMiddleware(logger));
+
 
 class App extends Component {
     constructor(props) {
@@ -29,17 +46,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Provider store={store}>
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h1 className="App-title">Welcome to React</h1>
+            </header>
+            <p className="App-intro">
+              To get started, edit <code>src/App.js</code> and save to reload.
+            </p>
 
-          <TodoContainer></TodoContainer>
-      </div>
+              <TodoContainer></TodoContainer>
+          </div>
+        </Provider>
     );
   }
 }

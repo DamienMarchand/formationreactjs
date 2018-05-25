@@ -1,6 +1,8 @@
 import React from 'react';
 
 import TodoItem from "./TodoItem";
+import {addTodo, loadTodos} from './store/todo.action';
+import {connect} from "react-redux";
 
 class TodoList extends React.Component {
 
@@ -8,29 +10,43 @@ class TodoList extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.loadTodos();
+    }
+
+    displayTodos () {
+        if (this.props.loading) {
+            return <p>Loading ....</p>
+        }
+
+        return this.props.listTodo.map((todo) => <TodoItem key= {todo.id} title={todo.title} isDone={todo.isDone}/>);
+    }
+
     render() {
-        console.log("Render list");
-        const listItems = this.props.listTodo.map((todo) => <TodoItem key={todo.id} title={todo.title} isDone={todo.isDone} />);
         const listItemsLength = this.props.listTodo.length;
 
         return (
             <div>
                 <div>Items : {listItemsLength}</div>
-                <ul>{listItems}</ul>
-                {/*<div>
-                    {this.props.children}
-                </div>*/}
+                {
+                    this.displayTodos()
+                }
             </div>
         );
     }
 }
 
-// Mock des todos
-/*const todos = [
-    {id: 1, title : 'Send a mail', isDone: false},
-    {id: 2, title : 'Develop', isDone: true},
-    {id: 3, title : 'Test', isDone: true},
-    {id: 4, title : 'Take a beer', isDone: false}
-];*/
+const mapStateToProps = state => ({
+    todos: state.todos.list,
+    loading: state.todos.loading
+});
 
-export default TodoList;
+const mapDispatchToProps = dispatch => ({
+    addTodo: name => dispatch(addTodo(name)),
+    loadTodos: () => dispatch(loadTodos())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList)

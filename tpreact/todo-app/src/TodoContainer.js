@@ -10,14 +10,14 @@ import TodoForm from "./TodoForm";
 class TodoContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        /*this.state = {
             listTodo: [
                 {id: 1, title : 'Send a mail', isDone: false},
                 {id: 2, title : 'Develop', isDone: true},
                 {id: 3, title : 'Test', isDone: true},
                 {id: 4, title : 'Take a beer', isDone: false}
             ]
-        };
+        };*/
 
         this.addTodo = this.addTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);

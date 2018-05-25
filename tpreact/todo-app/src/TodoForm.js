@@ -30,7 +30,6 @@ class TodoForm extends React.Component {
     }
 
     render() {
-        console.log("render", this.state.todoTitle);
         return (
             <div>
                 Titre : <input type="text" name="todoTitle" value={this.state.todoTitle} onChange={this.handleChangeTitle}/>
