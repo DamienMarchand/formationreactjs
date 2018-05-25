@@ -1,32 +1,51 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import TrainingItem from "./TrainingItem";
 import TrainingTitle from "./TrainingTitle";
+import {addTraining, loadTrainings} from './store/trainings.action';
+
 
 class TrainingList extends React.Component {
 
-    shouldComponentUpdate() {
-        console.log("TrainingList shouldComponentUpdate");
-        return true;
+    componentDidMount() {
+        this.props.loadTrainings();
     }
 
+    displayTrainings () {
+        if (this.props.loading) {
+            return <p>Loading ....</p>
+        }
+
+        return this.props.trainings.map((training) => <TrainingItem key= {training.id} name={training.name}/>);
+    }
+
+
     render() {
-        const trainings = [
-            {id: 1, name : 'Reac.js'},
-            {id: 2, name : 'React Native'},
-            {id: 3, name : 'Angular'},
-            {id: 4, name : 'Typescript'},
-            {id: 5}
-        ];
-
-        const listItems = trainings.map((training) => <TrainingItem key={training.id} name={training.name}/>);
-
         return (
             <div>
                 <TrainingTitle/>
-                <ul>{listItems}</ul>
+                {
+                    this.displayTrainings()
+                }
+                <div>
+                    <button onClick={() => this.props.addTraining('formation ajoutée via redux')}> Add training</button>
+                </div>
             </div>
         );
     }
 }
 
-export default TrainingList;
+const mapStateToProps = state => ({
+    trainings: state.trainings.list,
+    loading: state.trainings.loading
+});
+
+const mapDispatchToProps = dispatch => ({
+    addTraining: name => dispatch(addTraining(name)),
+    loadTrainings: () => dispatch(loadTrainings())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TrainingList)
