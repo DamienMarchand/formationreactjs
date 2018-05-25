@@ -20,20 +20,25 @@ class TodoContainer extends Component {
         };
 
         this.addTodo = this.addTodo.bind(this);
+        this.removeTodo = this.removeTodo.bind(this);
     }
 
-    addTodo = (todoTitle) => {
-        console.log("addTodo");
-        console.log(todoTitle);
-        /*this.setState({
-            fieldVal: val
-        })*/
-    };
+    addTodo(todoTitle) {
+        this.setState((prevState) => ({
+            listTodo: [...prevState.listTodo, {id : prevState.listTodo.length + 1, title : todoTitle, isDone: false}]
+        }));
+    }
+
+    removeTodo() {
+        this.setState(() => ({
+            listTodo: []
+        }));
+    }
 
     render() {
         return (
             <div>
-                <TodoForm addTodo={this.addTodo}/>
+                <TodoForm addTodo={this.addTodo} removeTodo={this.removeTodo}/>
                 <TodoList listTodo={this.state.listTodo}>
                 </TodoList>
             </div>
