@@ -1,52 +1,51 @@
 import React from 'react';
 
-import TodoItem from "./TodoItem";
-import {addTodo, loadTodos} from './store/todo.action';
-import {connect} from "react-redux";
+import TodoItem from './TodoItem';
+import { addTodo, loadTodos } from './store/todo.action';
+import { connect } from 'react-redux';
 
 class TodoList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-    constructor(props) {
-        super(props);
+  componentDidMount() {
+    this.props.loadTodos();
+  }
+
+  displayTodos() {
+    if (this.props.loading) {
+      return <p>Loading ....</p>;
     }
 
-    componentDidMount() {
-        this.props.loadTodos();
-    }
+    return this.props.listTodo.map(todo => <TodoItem key={todo.id} title={todo.title} isDone={todo.isDone} />);
+  }
 
-    displayTodos () {
-        if (this.props.loading) {
-            return <p>Loading ....</p>
-        }
+  render() {
+    const listItemsLength = this.props.listTodo.length;
 
-        return this.props.listTodo.map((todo) => <TodoItem key= {todo.id} title={todo.title} isDone={todo.isDone}/>);
-    }
-
-    render() {
-        const listItemsLength = this.props.listTodo.length;
-
-        return (
-            <div>
-                <div>Items : {listItemsLength}</div>
-                {
+    return (
+      <div>
+        <div>Items : {listItemsLength}</div>
+        {
                     this.displayTodos()
                 }
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    todos: state.todos.list,
-    loading: state.todos.loading
+  todos: state.todos.list,
+  loading: state.todos.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: name => dispatch(addTodo(name)),
-    loadTodos: () => dispatch(loadTodos())
+  addTodo: name => dispatch(addTodo(name)),
+  loadTodos: () => dispatch(loadTodos()),
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TodoList)
+  mapStateToProps,
+  mapDispatchToProps,
+)(TodoList);

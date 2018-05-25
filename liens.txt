@@ -1,0 +1,22 @@
+Progressive webApps et service worker :
+	https://developers.google.com/web/progressive-web-apps/
+
+	Voir dans le dev tools Chrome : Application --> Service Workers
+
+App shell model :
+	https://developers.google.com/web/fundamentals/architecture/app-shell
+	Affichage du squelette avant l'arrivée des données
+
+Personne à suivre :
+https://jakearchibald.com/
+
+Open source de Facebook :
+https://opensource.fb.com/
+
+Graphql : query language
+https://github.com/facebook/graphql
+
+
+https://caniuse.com/
+https://whatwebcando.today/
+https://electronjs.org/
